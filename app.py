@@ -1,4 +1,4 @@
-import os, requests, json, logging
+import os, requests, json, logging, time
 
 logging.basicConfig()  
 logger=logging.getLogger()
@@ -30,14 +30,17 @@ def get_all_friends_activity_list(web_access_token: str) -> list:
 
 
 def get_friend_activity(friends_activity: list, friend_name: str) -> dict or None:
+    current_epoch_time_in_ms = int(time.time()) * 1000 # Conversion needed as Spotify uses ms and Python, seconds
+
     for friend in friends_activity:
         if friend['user']['name'] == friend_name:
             friend_activity = {
                 "track": friend['track']['name'],
                 "album": friend['track']['album']['name'],
-                "artist": friend['track']['artist']['name']
+                "artist": friend['track']['artist']['name'],
+                "seconds_since_last_update": int((current_epoch_time_in_ms - friend['timestamp']) / 1000)
                 }
-            logger.info(friend_activity)
+            logger.info(friend)
             return friend_activity
 
     logger.error(f"No user {friend_name} found on friends acitivity.")
