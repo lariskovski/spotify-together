@@ -7,7 +7,7 @@ logger.setLevel(logging.INFO)
 SP_DC = os.environ['SP_DC']
 
 
-def get_access_token(sp_dc_token) -> str:
+def get_access_token(sp_dc_token: str) -> str:
     response = requests.get('https://open.spotify.com/get_access_token?reason=transport&productType=web_player',
                     headers={
                             'Content-Type':'application/json',
@@ -18,7 +18,7 @@ def get_access_token(sp_dc_token) -> str:
     return content['accessToken']
 
 
-def get_all_friends_activity_list(web_access_token) -> list:
+def get_all_friends_activity_list(web_access_token: str) -> list:
     # Alternative url https://guc-spclient.spotify.com/presence-view/v1/buddylist
     response = requests.get("https://spclient.wg.spotify.com/presence-view/v1/buddylist",
                     headers={
@@ -29,7 +29,7 @@ def get_all_friends_activity_list(web_access_token) -> list:
     return content['friends']
 
 
-def get_friend_activity(friends_activity, friend_name):
+def get_friend_activity(friends_activity: list, friend_name: str) -> dict or None:
     for friend in friends_activity:
         if friend['user']['name'] == friend_name:
             friend_activity = {
