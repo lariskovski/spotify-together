@@ -1,4 +1,8 @@
-import os, requests, json
+import os, requests, json, logging
+
+logging.basicConfig()  
+logger=logging.getLogger()
+logger.setLevel(logging.INFO)
 
 SP_DC = os.environ['SP_DC']
 
@@ -10,6 +14,7 @@ def get_access_token(sp_dc_token) -> str:
                             'Cookie': f'sp_dc={sp_dc_token}'
                             })
     content = json.loads(response.content)
+    logger.debug(content)
     return content['accessToken']
 
 
@@ -27,11 +32,15 @@ def get_all_friends_activity_list(web_access_token) -> list:
 def get_friend_activity(friends_activity, friend_name):
     for friend in friends_activity:
         if friend['user']['name'] == friend_name:
-            return {
-                    "track": friend['track']['name'],
-                    "album": friend['track']['album']['name'],
-                    "artist": friend['track']['artist']['name']
-                    }
+            friend_activity = {
+                "track": friend['track']['name'],
+                "album": friend['track']['album']['name'],
+                "artist": friend['track']['artist']['name']
+                }
+            logger.info(friend_activity)
+            return friend_activity
+
+    logger.error(f"No user {friend_name} found on friends acitivity.")
 
 
 def main():
