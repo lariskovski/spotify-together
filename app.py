@@ -36,6 +36,7 @@ def get_friend_activity(friends_activity: list, friend_name: str) -> dict or Non
         if friend['user']['name'] == friend_name:
             friend_activity = {
                 "track": friend['track']['name'],
+                "uri": friend['track']['uri'],
                 "album": friend['track']['album']['name'],
                 "artist": friend['track']['artist']['name'],
                 "seconds_since_last_update": int((current_epoch_time_in_ms - friend['timestamp']) / 1000)
