@@ -1,5 +1,7 @@
 # Spotify (Listen) Together
 
+Listen to the song your friend is listening to.
+
 Based on project [Spotify Buddylist](https://github.com/valeriangalliat/spotify-buddylist).
 
 ## Running it Locally
@@ -13,7 +15,7 @@ Based on project [Spotify Buddylist](https://github.com/valeriangalliat/spotify-
 ~~~~
 export SPOTIPY_CLIENT_ID='your-spotify-client-id'
 export SPOTIPY_CLIENT_SECRET='your-spotify-client-secret'
-export SPOTIPY_REDIRECT_URI='your-app-redirect-url'
+export SPOTIPY_REDIRECT_URI='your-app-redirect-url' #  SPOTIPY_REDIRECT_URI=http://127.0.0.1:5000/callback
 ~~~~
 
 - Execute the script with the following commands:
