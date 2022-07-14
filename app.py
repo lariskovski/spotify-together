@@ -78,7 +78,7 @@ def play_track(user_id: str, track_id: str) -> None:
 
 def main():
     # Provide your used_id and friends name
-    USER_ID = ''
+    USER_ID = '' # https://support.symdistro.com/hc/en-us/articles/360039036711-Spotify-How-to-obtain-a-URI-URL
     FRIEND_NAME = ''
 
     web_access_token = get_access_token(SP_DC)
